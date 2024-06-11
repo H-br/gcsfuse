@@ -588,16 +588,32 @@ func (t *ImplicitDirsTest) UnsupportedDirNames() {
 		nil,
 		t.createObjects(
 			map[string]string{
-				"foo//bar": "", // unsupported
-				"foo/1":    "", // supported
-				"a/2":      "", // supported
-				"a//2/6":   "", //unsupported
-				"a//3":     "", // unsupported
-				"4":        "", // supported
-				"/4/7":     "", //unsupported
-				"/bar":     "", // unsupported
-				"bar//5":   "", // unsupported
-				"/":        "", //unsupported
+				"foo//bar":   "", // unsupported
+				"foo/./bar":  "", // unsupported
+				"foo/../bar": "", // unsupported
+				"foo/1":      "", // supported
+				"a/2":        "", // supported
+				"a//2/8":     "", //unsupported
+				"a/./2/9":    "", //unsupported
+				"a/../2/10":  "", //unsupported
+				"a//3":       "", // unsupported
+				"a/./3":       "", // unsupported
+				"a/../3":       "", // unsupported
+				"a/./6":      "", // unsupported
+				"a/../7":     "", // unsupported
+				"4":          "", // supported
+				"/4/7":       "", //unsupported
+				"./4/11":     "", //unsupported
+				"../4/12":    "", //unsupported
+				"/bar":       "", // unsupported
+				"./bar":      "", // unsupported
+				"../bar":     "", // unsupported
+				"bar//5":     "", // unsupported
+				"bar/./13":   "", // unsupported
+				"bar/../14":  "", // unsupported
+				"/":          "", //unsupported
+				"./":         "", //unsupported
+				"../":        "", //unsupported
 			}))
 
 	// Statting the mount directory should return a directory entry.
@@ -677,13 +693,21 @@ func (t *ImplicitDirsTest) UnsupportedDirNames_WalkDir() {
 		nil,
 		t.createObjects(
 			map[string]string{
-				"a/b":     "", // supported
-				"a//b/i":  "", // unsupported
-				"foo/c/d": "", // supported
-				"foo//e":  "", // unsupported
-				"f":       "", // supported
-				"/h":      "", // unsupported
-				"/":       "", // unsupported
+				"a/b":      "", // supported
+				"a//b/m":   "", // unsupported
+				"a/./b/n":  "", // unsupported
+				"a/../b/o": "", // unsupported
+				"foo/c/d":  "", // supported
+				"foo//e":   "", // unsupported
+				"foo/./i":  "", // unsupported
+				"foo/../j": "", // unsupported
+				"f":        "", //supported
+				"/h":       "", // unsupported
+				"./k":      "", // unsupported
+				"../l":     "", // unsupported
+				"/":        "", // unsupported
+				".":        "", // unsupported
+				"..":       "", // unsupported
 			}))
 
 	expectedWalkedEntries := []struct {

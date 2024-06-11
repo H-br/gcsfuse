@@ -17,6 +17,7 @@ package util
 import (
 	"context"
 	"errors"
+	"fmt"
 	"math"
 	"os"
 	"path/filepath"
@@ -297,6 +298,14 @@ func (ts *UtilTest) TestIsUnsupportedObjectName() {
 			isUnsupported: true,
 		},
 		{
+			name:          "foo/./bar",
+			isUnsupported: true,
+		},
+		{
+			name:          "foo/../bar",
+			isUnsupported: true,
+		},
+		{
 			name:          "abc/",
 			isUnsupported: false,
 		},
@@ -305,16 +314,42 @@ func (ts *UtilTest) TestIsUnsupportedObjectName() {
 			isUnsupported: true,
 		},
 		{
-			name:          "/",
+			name:          "abc/./",
+			isUnsupported: true,
+		},
+		{
+			name:          "abc/../",
 			isUnsupported: true,
 		},
 		{
 			name:          "/foo",
 			isUnsupported: true,
 		},
+		{
+			name:          "./foo",
+			isUnsupported: true,
+		},
+		{
+			name:          "../foo",
+			isUnsupported: true,
+		},
+		{
+			name:          "/",
+			isUnsupported: true,
+		},
+		{
+			name:          ".",
+			isUnsupported: true,
+		},
+		{
+			name:          "..",
+			isUnsupported: true,
+		},
 	}
 
 	for _, tc := range cases {
-		assert.Equal(ts.T(), tc.isUnsupported, IsUnsupportedObjectName(tc.name))
+		ts.Run(fmt.Sprintf("name=%s", tc.name), func() {
+			assert.Equal(ts.T(), tc.isUnsupported, IsUnsupportedObjectName(tc.name))
+		})
 	}
 }

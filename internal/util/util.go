@@ -44,8 +44,9 @@ const (
 )
 
 var (
-	unsupportedObjectNameSubstrings = []string{"//"}
-	unsupportedObjectNamePrefixes   = []string{"/"}
+	unsupportedObjectNameSubstrings = []string{"//", "/./", "/../"}
+	unsupportedObjectNamePrefixes   = []string{"/", "./", "../"}
+	unsupportedObjectNames          = []string{"", ".", ".."}
 )
 
 // 1. Returns the same filepath in case of absolute path or empty filename.
@@ -132,6 +133,11 @@ func IsUnsupportedObjectName(name string) bool {
 	}
 	for _, prefix := range unsupportedObjectNamePrefixes {
 		if strings.HasPrefix(name, prefix) {
+			return true
+		}
+	}
+	for _, unsupportedObjectName := range unsupportedObjectNames {
+		if name == unsupportedObjectName {
 			return true
 		}
 	}

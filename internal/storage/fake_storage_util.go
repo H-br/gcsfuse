@@ -28,6 +28,8 @@ const TestObjectName string = "gcsfuse/default.txt"
 const TestObjectSubRootFolderName string = "gcsfuse/SubFolder/"
 const TestSubObjectName string = "gcsfuse/SubFolder/default.txt"
 const TestObjectInUnsupportedDirName string = "gcsfuse//fileInUnsupportedDirName"
+const TestObjectInUnsupportedDirName2 string = "gcsfuse/./fileInUnsupportedDirName2"
+const TestObjectInUnsupportedDirName3 string = "gcsfuse/../fileInUnsupportedDirName3"
 const ContentInTestObject string = "Hello GCSFuse!!!"
 const ContentInTestSubObject string = "Hello GCSFuse From SubObject!!!"
 const TestObjectGeneration int64 = 780
@@ -138,6 +140,26 @@ func getTestFakeStorageObject() []fakestorage.Object {
 		Content: []byte(ContentInTestSubObject),
 	}
 	fakeObjects = append(fakeObjects, testObjectInUnsupportedDirName)
+
+	testObjectInUnsupportedDirName2 := fakestorage.Object{
+		ObjectAttrs: fakestorage.ObjectAttrs{
+			BucketName: TestBucketName,
+			Name:       TestObjectInUnsupportedDirName2,
+			Generation: TestObjectGeneration,
+		},
+		Content: []byte(ContentInTestSubObject),
+	}
+	fakeObjects = append(fakeObjects, testObjectInUnsupportedDirName2)
+
+	testObjectInUnsupportedDirName3 := fakestorage.Object{
+		ObjectAttrs: fakestorage.ObjectAttrs{
+			BucketName: TestBucketName,
+			Name:       TestObjectInUnsupportedDirName3,
+			Generation: TestObjectGeneration,
+		},
+		Content: []byte(ContentInTestSubObject),
+	}
+	fakeObjects = append(fakeObjects, testObjectInUnsupportedDirName3)
 
 	return fakeObjects
 }
