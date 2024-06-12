@@ -103,7 +103,7 @@ func TestLocalModificationTest(t *testing.T) {
 		{"--implicit-dirs=true"},
 		{"--implicit-dirs=false"},
 	}
-	setup.AppendFlagsToAllFlagsInTheFlagsSet(&flagsSet, "--config-file="+createConfigFile(cacheCapacityInMB, false, configFileName))
+	setup.AppendFlagsToAllFlagsInTheFlagsSet(&flagsSet, "--config-file="+createConfigFile(cacheCapacityInMB, false, configFileName, false))
 
 	// Run tests.
 	for _, flags := range flagsSet {

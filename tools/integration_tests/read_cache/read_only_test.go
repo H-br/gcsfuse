@@ -169,8 +169,8 @@ func TestReadOnlyTest(t *testing.T) {
 		{"--implicit-dirs=false"},
 	}
 	setup.AppendFlagsToAllFlagsInTheFlagsSet(&flagsSet,
-		"--config-file="+createConfigFile(cacheCapacityInMB, false, configFileName+"1"),
-		"--config-file="+createConfigFile(cacheCapacityInMB, true, configFileName+"2"))
+		"--config-file="+createConfigFile(cacheCapacityInMB, false, configFileName+"1", false),
+		"--config-file="+createConfigFile(cacheCapacityInMB, true, configFileName+"2", false))
 	setup.AppendFlagsToAllFlagsInTheFlagsSet(&flagsSet, "--o=ro", "")
 
 	// Run tests.
