@@ -178,7 +178,8 @@ func TestMain(m *testing.M) {
 	mountConfigFlags := createMountConfigsAndEquivalentFlags()
 	flagsSet = append(flagsSet, mountConfigFlags...)
 
-	if setup.TestOnTPCEndPoint() {
+	// gRPC tests will not run in TPC environment
+	if setup.TestOnTPCEndPoint() && testing.Short() {
 		successCodeTPC := static_mounting.RunTests(flagsSet, m)
 		os.Exit(successCodeTPC)
 	}
