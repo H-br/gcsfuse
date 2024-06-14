@@ -178,8 +178,8 @@ func TestMain(m *testing.M) {
 	mountConfigFlags := createMountConfigsAndEquivalentFlags()
 	flagsSet = append(flagsSet, mountConfigFlags...)
 
-	mountConfigFlags = setup.AddHNSFlagForHierarchicalBucket(ctx, storageClient)
-	flagsSet = append(flagsSet, mountConfigFlags...)
+	hnsFlagConfig := setup.AddHNSFlagForHierarchicalBucket(ctx, storageClient)
+	flagsSet = append(flagsSet, hnsFlagConfig)
 
 	successCode := static_mounting.RunTests(flagsSet, m)
 
