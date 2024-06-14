@@ -824,7 +824,7 @@ func (t *FileCacheDestroyTest) CacheIsNotDeletedOnUnmount() {
 }
 
 // A collection of tests for a file system where the file cache is enabled
-// with cache-file-for-range-read set to True.
+// with parallel downloads.
 type FileCacheWithParallelDownloads struct {
 	FileCacheTest
 }

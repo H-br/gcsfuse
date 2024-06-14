@@ -142,7 +142,7 @@ func TestCacheFileForRangeReadFalseTest(t *testing.T) {
 		{"--implicit-dirs=false"},
 	}
 	setup.AppendFlagsToAllFlagsInTheFlagsSet(&flagsSet,
-		"--config-file="+createConfigFile(cacheCapacityForRangeReadTestInMiB, false, configFileName, true))
+		"--config-file="+createConfigFile(cacheCapacityForRangeReadTestInMiB, false, configFileName, false))
 	setup.AppendFlagsToAllFlagsInTheFlagsSet(&flagsSet, "--o=ro", "")
 	flagsSet = append(flagsSet, []string{"--implicit-dirs=true", "--config-file=" + createConfigFile(cacheCapacityForRangeReadTestInMiB,
 		false, configFileName, true)})
