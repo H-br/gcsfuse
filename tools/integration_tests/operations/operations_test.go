@@ -137,16 +137,6 @@ func createMountConfigsAndEquivalentFlags() (flags [][]string) {
 	filePath3 := setup.YAMLConfigFile(mountConfig3, "config3.yaml")
 	flags = append(flags, []string{"--config-file=" + filePath3})
 
-	mountConfig4 := config.MountConfig{
-		EnableHNS: true,
-		LogConfig: config.LogConfig{
-			Severity:        config.TRACE,
-			LogRotateConfig: config.DefaultLogRotateConfig(),
-		},
-	}
-	filePath4 := setup.YAMLConfigFile(mountConfig4, "config4.yaml")
-	flags = append(flags, []string{"--config-file=" + filePath4})
-
 	return flags
 }
 
@@ -186,6 +176,9 @@ func TestMain(m *testing.M) {
 	}
 
 	mountConfigFlags := createMountConfigsAndEquivalentFlags()
+	flagsSet = append(flagsSet, mountConfigFlags...)
+
+	mountConfigFlags = setup.AddHNSFlagForHierarchicalBucket(ctx, storageClient)
 	flagsSet = append(flagsSet, mountConfigFlags...)
 
 	successCode := static_mounting.RunTests(flagsSet, m)
