@@ -67,7 +67,7 @@ const (
 	downloadParallelismPerFile          = 16
 	maxDownloadParallelism              = -1
 	readRequestSizeMB                   = 16
-	enableCrcCheck                      = true
+	enableCrcCheck                      = false
 )
 
 var (
